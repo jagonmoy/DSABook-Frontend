@@ -5,6 +5,7 @@ import Blog from  '../components/blog'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import theme from '../theme';
 
 const useStyles = makeStyles((theme) => ({
     blogContainer: {
@@ -19,17 +20,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Home() {
-    const classes = useStyles();
+    const classes = useStyles(theme);
     const [blogs,setblogs] = useState([]);
      
     useEffect(() => {
-        console.log("Home is called")
-        axios.get("http://192.168.0.115:3010/api/blogs/").then((res) => {
-            console.log(res);
+        axios.get("http://10.10.11.74:3010/api/blogs/").then((res) => {
             const allBlogs = res.data.blogs;
-            console.log(allBlogs);
             setblogs(allBlogs);
-            console.log(blogs)
         }).catch((err) => { console.log(err) });
     },[]);   
 

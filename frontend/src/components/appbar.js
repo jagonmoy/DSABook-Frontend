@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Appbar() {
-  const classes = useStyles();
+  const classes = useStyles(theme);
 
   return (
       <AppBar className={classes.appbar} position="static">
@@ -26,7 +26,10 @@ function Appbar() {
                   <Typography variant="h6" color="primary">
                       Home
                   </Typography>
-                  <Button onClick={() => { alert('LOGIN is Pressed') }} variant="contained" color="primary"> LOG IN</Button>
+                  <Grid justifyContent = "space-between" > 
+                  <Button onClick={() => { alert('SIGNUP is Pressed') }} variant="contained" color="primary" style = {{marginRight : 10}} > SIGN UP </Button>
+                  <Button onClick={() => { alert('SIGNIN is Pressed') }} variant="contained" color="primary"> SIGN IN</Button>
+                  </Grid>
               </Grid>
           </Toolbar>
       </AppBar>

@@ -10,6 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import theme from '../theme';
 
 
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
       paddingBottom : theme.spacing(3),
@@ -28,6 +30,7 @@ export default function Blog(props) {
     useEffect(() => {
     },[blog.updatedAt])
 
+    
     return (
         <Grid item xs={12} sm={6} md={4} className={classes.basic} allign='center'>
             <Card className={classes.root}>

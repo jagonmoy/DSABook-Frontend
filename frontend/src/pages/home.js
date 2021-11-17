@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import theme from '../theme';
+import Navbar from '../components/navbar';
 
 const useStyles = makeStyles((theme) => ({
     blogContainer: {
@@ -22,15 +23,18 @@ const useStyles = makeStyles((theme) => ({
 export default function Home() {
     const classes = useStyles(theme);
     const [blogs,setblogs] = useState([]);
+    document.title = "BlOG"
      
     useEffect(() => {
-        axios.get("http://10.10.11.74:3010/api/blogs/").then((res) => {
+        axios.get("http://192.168.43.250:3010/api/blogs/").then((res) => {
             const allBlogs = res.data.blogs;
             setblogs(allBlogs);
         }).catch((err) => { console.log(err) });
     },[]);   
 
     return (
+        <div>
+        <Navbar/>
         <Container maxWidth="lg" className={classes.blogContainer}>
             <Typography variant="h4" className={classes.title} align="center">
                BLOGS
@@ -43,5 +47,6 @@ export default function Home() {
                 }
             </Grid>
         </Container>
+        </div>
     );
 }

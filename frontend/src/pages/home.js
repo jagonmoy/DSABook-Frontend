@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import theme from '../theme';
 import Navbar from '../components/navbar';
 
+
 const useStyles = makeStyles((theme) => ({
     blogContainer: {
       paddingTop: theme.spacing(1),
@@ -22,31 +23,35 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
     const classes = useStyles(theme);
-    const [blogs,setblogs] = useState([]);
+    const [blogs, setblogs] = useState([]);
+    // const [page, setPage] = useState(1);
     document.title = "BlOG"
      
     useEffect(() => {
-        axios.get("http://192.168.43.250:3010/api/blogs/").then((res) => {
+        axios.get(`http://10.10.11.74:3010/api/blogs`).then((res) => {
             const allBlogs = res.data.blogs;
             setblogs(allBlogs);
         }).catch((err) => { console.log(err) });
-    },[]);   
-
+    },[]);
+    
     return (
-        <div>
-        <Navbar/>
+      <div>
+        <Navbar />
         <Container maxWidth="lg" className={classes.blogContainer}>
-            <Typography variant="h4" className={classes.title} align="center">
-               BLOGS
-            </Typography>
-            <Grid container direction='column' justifyContent="center" alignItems="center" >
-                {
-                    blogs.map((blog) => (
-                        <Blog blog={blog} key={blog.username} />
-                    ))
-                }
-            </Grid>
+          <Typography variant="h4" className={classes.title} align="center">
+            BLOGS
+          </Typography>
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {blogs.map((blog) => (
+              <Blog blog={blog} key={blog.username} shorText={"summary"} />
+            ))}
+          </Grid>
         </Container>
-        </div>
+      </div>
     );
 }

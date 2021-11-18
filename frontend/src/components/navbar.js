@@ -28,8 +28,10 @@ function Navbar() {
             Home
           </Typography>
           <Grid justifyContent="space-between" >
-            <Button onClick={()=> history.push('./signup')} variant="contained" color="primary" style={{ marginRight: 10 }} > SIGN UP </Button>
-            <Button onClick={() => history.push('./signin')} variant="contained" color="primary"> SIGN IN</Button>
+            {localStorage.getItem('email') === null && <Button onClick={() => history.push('./signup')} variant="contained" color="primary" style={{ marginRight: 10 }} > SIGN UP </Button>}
+            {localStorage.getItem('email') === null && <Button onClick={() => history.push('./signin')} variant="contained" color="primary"> SIGN IN</Button>}
+            {localStorage.getItem('email') !== null && <Button onClick={() => history.push('./signup')} variant="contained" color="primary" style={{ marginRight: 10 }} > {localStorage.getItem('email')}</Button>}
+            {localStorage.getItem('email') !== null && <Button onClick={() => {window.localStorage.removeItem('email');history.push('./signin')}} variant="contained" color="primary"> SIGN OUT</Button>}
           </Grid>
         </Grid>
       </Toolbar>

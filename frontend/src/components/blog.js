@@ -1,4 +1,4 @@
-import React , {useEffect} from 'react';
+import React , {useState,useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -25,34 +25,45 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Blog(props) {
     const classes = useStyles(theme);
-     
+    const [shorText, setShortText] = useState(props.shorText);
+    
     const {blog} = props ;
     useEffect(() => {
     },[blog.updatedAt])
 
-    
     return (
-        <Grid item xs={12} sm={6} md={4} className={classes.basic} allign='center'>
-            <Card className={classes.root}>
-                <CardActionArea>
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {blog.blogHeadline}
-                        </Typography>
-                        <Typography gutterBottom variant="h6" component="h3">
-                            {blog.username}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {blog.blogDescription}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions>
-                    <Button size="small" color="primary">
-                        Coninue Reading
-                    </Button>
-                </CardActions>
-            </Card>
-        </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        md={4}
+        className={classes.basic}
+        allign="center"
+      >
+        <Card className={classes.root}>
+          <CardActionArea>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {blog.blogHeadline}
+              </Typography>
+              <Typography gutterBottom variant="h6" component="h3">
+                {blog.username}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {blog.blogDescription}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => setShortText("Long")}
+            >
+              Coninue Reading
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
     );
 }

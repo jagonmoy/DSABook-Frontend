@@ -1,4 +1,5 @@
-import React from 'react';
+import React , {useState} from 'react';
+import axios from "axios";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,6 +9,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { Alert, AlertTitle } from '@material-ui/lab';
+import { useHistory } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -21,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',  
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -31,6 +36,34 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Signup() {
   const classes = useStyles();
+  const history = useHistory()
+
+
+
+  const [name,setName] = useState('');
+  const [userName,setUserName] = useState('');
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+  const [confirmPassword,setConfirmPassword] = useState('');
+  const [popUp,setPopUp] = useState('');
+  
+  function submitHandelar(e) {
+    e.preventDefault()
+    console.log(name,userName,email);
+    axios({
+        method: 'POST',
+        url: 'http://10.10.11.74:3010/api/auth/signup/',
+        data: { name,username : userName,email,password,confirmPassword },
+        validateStatus: () => true
+    }).then(res => {
+         if ( res.status === 200 ) setPopUp('Success');
+         else setPopUp('Failed');
+         console.log(res.status);
+      }, (error) => {
+         setPopUp('Failed');
+         console.log(error);
+      }); 
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -42,18 +75,18 @@ export default function Signup() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={submitHandelar}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                name="name"
                 variant="outlined"
                 required
                 fullWidth
                 id="name"
                 label="Name"
                 autoFocus
+                onChange={(e) => setName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -63,8 +96,8 @@ export default function Signup() {
                 fullWidth
                 id="userName"
                 label="User Name"
-                name="lastName"
-                autoComplete="lname"
+                name="userName"
+                onChange={(e) => setUserName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -75,7 +108,7 @@ export default function Signup() {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -87,7 +120,7 @@ export default function Signup() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -98,8 +131,8 @@ export default function Signup() {
                 name="confirmPassword"
                 label="Confirm Password"
                 type="password"
-                id="password"
-                autoComplete="current-password"
+                id="confirmpassword"
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </Grid>
           </Grid>
@@ -112,6 +145,27 @@ export default function Signup() {
           >
             Sign Up
           </Button>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link onClick = {()=>history.push('./signin')} variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
+          <Grid item style={{ marginTop : 20 }}>
+          {popUp === "Success" && (
+            <Alert severity="success">
+              <AlertTitle>Success</AlertTitle>
+              <strong>Account Created Successfully!</strong>
+            </Alert>
+          )}
+          {popUp === "Failed" && (
+            <Alert severity="error">
+              <AlertTitle>Error</AlertTitle>
+              <strong>Account Creation Unsuccessfull!</strong>
+            </Alert>
+          )}
+          </Grid>
         </form>
       </div>
     </Container>

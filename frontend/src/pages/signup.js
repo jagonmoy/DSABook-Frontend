@@ -12,6 +12,8 @@ import Container from '@material-ui/core/Container';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useHistory } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import Navbar from '../components/navbar';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +47,7 @@ export default function Signup() {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [confirmPassword,setConfirmPassword] = useState('');
-  const [popUp,setPopUp] = useState('');
+  const [popUp, setPopUp] = useState('');
   
   function submitHandelar(e) {
     e.preventDefault()
@@ -66,6 +68,8 @@ export default function Signup() {
   }
 
   return (
+    <>
+    <Navbar/>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -153,12 +157,12 @@ export default function Signup() {
             </Grid>
           </Grid>
           <Grid item style={{ marginTop : 20 }}>
-          {popUp === "Success" && (
+          { popUp === "Success" && (
             <Alert severity="success">
               <AlertTitle>Success</AlertTitle>
               <strong>Account Created Successfully!</strong>
             </Alert>
-          )}
+         )}
           {popUp === "Failed" && (
             <Alert severity="error">
               <AlertTitle>Error</AlertTitle>
@@ -168,6 +172,7 @@ export default function Signup() {
           </Grid>
         </form>
       </div>
-    </Container>
+      </Container>
+    </>
   );
 }

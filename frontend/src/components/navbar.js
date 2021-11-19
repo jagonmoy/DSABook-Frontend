@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import theme from '../theme'
 import { useHistory } from 'react-router-dom';
 
+
 const useStyles = makeStyles((theme) => ({
   appbar: {
     backgroundColor: '#fff'
@@ -24,13 +25,14 @@ function Navbar() {
           container
           spacing={1}
         >
-          <Typography variant="h6" color="primary">
-            Home
+          <Typography onClick = {() => history.push('./')}variant="h6" color="primary">
+           MyBlog
           </Typography>
           <Grid justifyContent="space-between" >
             {localStorage.getItem('email') === null && <Button onClick={() => history.push('./signup')} variant="contained" color="primary" style={{ marginRight: 10 }} > SIGN UP </Button>}
             {localStorage.getItem('email') === null && <Button onClick={() => history.push('./signin')} variant="contained" color="primary"> SIGN IN</Button>}
             {localStorage.getItem('email') !== null && <Button onClick={() => history.push('./signup')} variant="contained" color="primary" style={{ marginRight: 10 }} > {localStorage.getItem('email')}</Button>}
+            {localStorage.getItem('email') !== null && <Button onClick={() => history.push('./createBlog')} variant="contained" color="primary" style={{ marginRight: 10 }} > CREATE BLOG</Button>}
             {localStorage.getItem('email') !== null && <Button onClick={() => {window.localStorage.removeItem('email');history.push('./signin')}} variant="contained" color="primary"> SIGN OUT</Button>}
           </Grid>
         </Grid>

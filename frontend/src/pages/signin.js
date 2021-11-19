@@ -12,6 +12,7 @@ import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+import Navbar from "../components/navbar";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,6 +72,8 @@ export default function Signin() {
   }
 
   return (
+    <>
+    <Navbar/>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -129,6 +132,7 @@ export default function Signin() {
           </Grid>
         </form>
       </div>
-    </Container>
+      </Container>
+      </>
   );
 }

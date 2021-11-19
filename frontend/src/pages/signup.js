@@ -13,6 +13,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { useHistory } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import Navbar from '../components/navbar';
+import Home from './home';
 
 
 
@@ -54,7 +55,7 @@ export default function Signup() {
     console.log(name,userName,email);
     axios({
         method: 'POST',
-        url: 'http://10.10.11.74:3010/api/auth/signup/',
+        url: '/api/auth/signup/',
         data: { name,username : userName,email,password,confirmPassword },
         validateStatus: () => true
     }).then(res => {
@@ -67,7 +68,7 @@ export default function Signup() {
       }); 
   }
 
-  return (
+  if ( localStorage.getItem('username') === null ) return (
     <>
     <Navbar/>
     <Container component="main" maxWidth="xs">
@@ -175,4 +176,5 @@ export default function Signup() {
       </Container>
     </>
   );
+  else return <Home/>
 }

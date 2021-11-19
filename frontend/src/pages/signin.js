@@ -13,6 +13,7 @@ import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Navbar from "../components/navbar";
+import Home from "./home";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -55,23 +56,19 @@ export default function Signin() {
     }).then(
       (res) => {
         if (res.status === 200) {
-          localStorage.setItem("email", email);
-          console.log("haha");
-          console.log("haha",window.localStorage.getItem('email'));
+          localStorage.setItem("username",res.data.data);
           setPopUp("Success");
           history.push('./') 
         }
         else setPopUp("Failed");
-        console.log(res.status);
       },
       (error) => {
         setPopUp("Failed");
-        console.log(error);
       }
     );
   }
 
-  return (
+  if (localStorage.getItem('username') === null ) return (
     <>
     <Navbar/>
     <Container component="main" maxWidth="xs">
@@ -135,4 +132,5 @@ export default function Signin() {
       </Container>
       </>
   );
+  else return <Home/>
 }

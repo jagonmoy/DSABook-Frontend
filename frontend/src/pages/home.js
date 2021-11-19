@@ -28,10 +28,18 @@ export default function Home() {
     document.title = "BlOG"
      
     useEffect(() => {
-        axios.get(`http://10.10.11.74:3010/api/blogs`).then((res) => {
-            const allBlogs = res.data.blogs;
-            setblogs(allBlogs);
-        }).catch((err) => { console.log(err) });
+     
+      axios({
+          method: 'GET',
+          url: '/api/blogs/',
+          validateStatus: () => true
+      }).then(res => {
+        const allBlogs = res.data.data;
+            
+        setblogs(allBlogs);
+        }, (error) => {
+          console.log(error)
+        }); 
     },[]);
     
     return (
@@ -48,9 +56,10 @@ export default function Home() {
             alignItems="center"
           >
             {blogs.map((blog) => (
-              <Blog blog={blog} key={blog.username} shorText={"summary"} />
+              <Blog blog={blog} key={blog.id} shorText={"summary"} />
             ))}
           </Grid>
+          {/* <h1>{blogs}</h1> */}
         </Container>
       </div>
     );

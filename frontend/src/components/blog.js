@@ -8,14 +8,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import theme from '../theme';
-
-
-
-
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      paddingBottom : theme.spacing(3),
+      paddingBottom: theme.spacing(3),  
     },
     basic: {
       marginTop : theme.spacing(3) ,
@@ -26,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Blog(props) {
   const classes = useStyles(theme);
+  const history = useHistory()
 
     const {blog} = props ;
     useEffect(() => {
@@ -58,6 +56,7 @@ export default function Blog(props) {
             <Button
               size="small"
               color="primary"
+              onClick={() => { console.log("Lasasdasdasdasd");history.push('/blogView') }}
             >
               Coninue Reading
             </Button>

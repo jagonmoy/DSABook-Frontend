@@ -22,13 +22,17 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Blog(props) {
+
+console.log("kisher vitor")
+
   const classes = useStyles(theme);
   const history = useHistory()
 
     const {blog} = props ;
     useEffect(() => {
-    },[blog.updatedAt])
+    }, [blog.updatedAt])
 
+   
     return (
       <Grid
         item
@@ -56,7 +60,7 @@ export default function Blog(props) {
             <Button
               size="small"
               color="primary"
-              onClick={() => { console.log("Lasasdasdasdasd");history.push('/blogView') }}
+              onClick={() => { history.push(`/${blog.id}`) }}
             >
               Coninue Reading
             </Button>

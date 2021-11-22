@@ -59,7 +59,10 @@ export default function Signup() {
         data: { name,username : userName,email,password,confirmPassword },
         validateStatus: () => true
     }).then(res => {
-         if ( res.status === 200 ) setPopUp('Success');
+      if (res.status === 200) {
+        localStorage.setItem('toast','Account Created Successfully') 
+        setPopUp('Success');
+      }
          else setPopUp('Failed');
          console.log(res.status);
       }, (error) => {
@@ -158,12 +161,8 @@ export default function Signup() {
             </Grid>
           </Grid>
           <Grid item style={{ marginTop : 20 }}>
-          { popUp === "Success" && (
-            <Alert severity="success">
-              <AlertTitle>Success</AlertTitle>
-              <strong>Account Created Successfully!</strong>
-            </Alert>
-         )}
+          {popUp === "Success" && history.push('./signin')
+           }
           {popUp === "Failed" && (
             <Alert severity="error">
               <AlertTitle>Error</AlertTitle>

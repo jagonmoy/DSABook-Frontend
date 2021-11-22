@@ -14,6 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Navbar from "../components/navbar";
 import Home from "./home";
+import CustomizedSnackbars from "../components/customizedSnackbar";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -70,6 +71,7 @@ export default function Signin() {
 
   if (localStorage.getItem('username') === null ) return (
     <>
+    {localStorage.getItem('toast') !== "null" && <CustomizedSnackbars message={localStorage.getItem('toast')}/> }
     <Navbar/>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -128,7 +130,7 @@ export default function Signin() {
           )}
           </Grid>
         </form>
-      </div>
+        </div>
       </Container>
       </>
   );

@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import theme from '../theme';
 import Navbar from '../components/navbar';
+import CustomizedSnackbars from '../components/customizedSnackbar';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +41,7 @@ export default function Home() {
         }, (error) => {
           console.log(error)
         }); 
-    },[]);
+    },[blogs.length]);
     
     return (
       <div>
@@ -59,8 +60,8 @@ export default function Home() {
               <Blog blog={blog} key={blog.id} shorText={"summary"} />
             ))}
           </Grid>
-          {/* <h1>{blogs}</h1> */}
         </Container>
+        {localStorage.getItem('toast') !== "null" && <CustomizedSnackbars message={localStorage.getItem('toast')} />}
       </div>
     );
 }

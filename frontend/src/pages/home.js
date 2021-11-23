@@ -7,29 +7,33 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import theme from '../theme';
 import Navbar from '../components/navbar';
-import CustomizedSnackbars from '../components/customizedSnackbar';
+
 
 
 const useStyles = makeStyles((theme) => ({
-    blogContainer: {
-      paddingTop: theme.spacing(1),
-    },
-    title: {
-      fontWeight: 800,
-      paddingBottom : theme.spacing(3),
-      paddingTop : theme.spacing(3),
-    }
+  blogContainer: {
+    paddingTop: theme.spacing(1),
+    paddingRight: theme.spacing(70),
+  },
+  title: {
+    fontWeight: 800,
+    paddingBottom: theme.spacing(3),
+    paddingTop: theme.spacing(3),
+    paddingLeft: theme.spacing(40),
+    
+  },
 }));
 
 
 export default function Home() {
+
     const classes = useStyles(theme);
     const [blogs, setblogs] = useState([]);
     // const [page, setPage] = useState(1);
     document.title = "BlOG"
+  
      
     useEffect(() => {
-     
       axios({
           method: 'GET',
           url: '/api/blogs/',
@@ -41,19 +45,21 @@ export default function Home() {
         }, (error) => {
           console.log(error)
         }); 
-    },[blogs.length]);
+    }, [blogs]);
     
     return (
-      <div>
+      <>
         <Navbar />
-        <Container maxWidth="lg" className={classes.blogContainer}>
-          <Typography variant="h4" className={classes.title} align="center">
+        <Container className={classes.blogContainer}  allign="center"
+        alignItems='center'
+        justify="center">
+          <Typography variant="h4" className={classes.title} >
             BLOGS
           </Typography>
           <Grid
             container
             direction="column"
-            justifyContent="center"
+            justify="center"
             alignItems="center"
           >
             {blogs.map((blog) => (
@@ -61,7 +67,8 @@ export default function Home() {
             ))}
           </Grid>
         </Container>
-        {localStorage.getItem('toast') !== "null" && <CustomizedSnackbars message={localStorage.getItem('toast')} />}
-      </div>
+        {setTimeout(function(){ window.localStorage.removeItem("popup") }, 2000)}
+      </>
+        
     );
 }

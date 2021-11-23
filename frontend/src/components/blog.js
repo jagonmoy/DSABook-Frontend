@@ -1,4 +1,4 @@
-import React , {useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,7 +12,8 @@ import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      paddingBottom: theme.spacing(3),  
+    paddingBottom: theme.spacing(3),
+    width : theme.spacing(100)
     },
     basic: {
       marginTop : theme.spacing(3) ,
@@ -29,8 +30,6 @@ console.log("kisher vitor")
   const history = useHistory()
 
     const {blog} = props ;
-    useEffect(() => {
-    }, [blog.updatedAt])
 
    
     return (
@@ -41,6 +40,8 @@ console.log("kisher vitor")
         md={4}
         className={classes.basic}
         allign="center"
+        alignItems='center'
+        justify="center"
       >
         <Card className={classes.root}>
           <CardActionArea>

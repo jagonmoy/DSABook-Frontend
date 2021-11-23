@@ -2,7 +2,7 @@ import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -17,12 +17,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedSnackbars({message,path}) {
+export default function CustomizedSnackbars({ message }) {
+  console.log("hello");
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const history = useHistory()
 
-  const handleClose = (event, reason) => {
+  const handleClose = (reason) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -37,7 +37,6 @@ export default function CustomizedSnackbars({message,path}) {
           {message}
         </Alert>
       </Snackbar>
-      {localStorage.setItem('toast','null')}
     </div>
   );
 }

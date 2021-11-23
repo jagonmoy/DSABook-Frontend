@@ -1,3 +1,4 @@
+import React , {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -7,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import theme from '../theme'
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import CustomizedSnackbars from './customizedSnackbar';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +32,7 @@ function Navbar() {
     }).then(
       (res) => {
         window.localStorage.removeItem("username");
+        window.localStorage.removeItem("popup")
         history.push("./signin");
       },
       (error) => {
@@ -37,6 +40,7 @@ function Navbar() {
       }
     );
   }
+ 
 
   return (
     <AppBar className={classes.appbar} position="static">
@@ -55,6 +59,8 @@ function Navbar() {
             {localStorage.getItem('username') !== null && <Typography color="primary" style={{ marginRight: 10 }} > {localStorage.getItem('username')}</Typography>}
             {localStorage.getItem('username') !== null && <Button onClick={() => history.push('./createBlog')} variant="contained" color="primary" style={{ marginRight: 10 }} > CREATE BLOG</Button>}
             {localStorage.getItem('username') !== null && <Button onClick={() => signOutFunctionality()} variant="contained" color="primary"> SIGN OUT</Button>}
+            {localStorage.getItem('popup') !== null && <CustomizedSnackbars message={localStorage.getItem('popup')} />}
+            {/* {setTimeout(function(){ window.localStorage.removeItem("popup") }, 10000)} */}
           </Grid>
         </Grid>
       </Toolbar>

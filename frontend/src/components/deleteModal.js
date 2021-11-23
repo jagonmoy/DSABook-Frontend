@@ -2,10 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import CustomizedSnackbars from './customizedSnackbar';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 
@@ -13,7 +10,6 @@ export default function DeleteModal({blogID}) {
     const [open, setOpen] = React.useState(false);
     const [yes, setYes] = React.useState(false);
     const [no, setNo] = React.useState(false);
-    const [toastShow, setToastShow] = React.useState(false);
     const history = useHistory()
 
    
@@ -40,7 +36,7 @@ export default function DeleteModal({blogID}) {
         }); 
 
         setYes(true);
-        localStorage.setItem("toast","Post Deleted SuccessFully!!");
+        localStorage.setItem("popup","Blog Deleted SuccessFully!!");
         setOpen(false);
     };
 

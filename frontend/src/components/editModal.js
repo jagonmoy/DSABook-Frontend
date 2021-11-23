@@ -4,12 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from "axios";
-import CustomizedSnackbars from './customizedSnackbar';
 import { useHistory } from 'react-router-dom';
-import BlogView from '../pages/blogView';
 
 export default function EditModal({blogID,blogUnit}) {
     const [open, setOpen] = React.useState(false);
@@ -41,7 +38,7 @@ export default function EditModal({blogID,blogUnit}) {
         
     },).then(res => {
         setUpdated(true);
-        localStorage.setItem('toast', "Post Updated Successfully!!")
+        localStorage.setItem('popup', "Blog Updated Successfully!!")
         history.push(`./${blogID}`)
       }, (error) => {
       
@@ -90,9 +87,6 @@ export default function EditModal({blogID,blogUnit}) {
           </DialogActions>
         </DialogContent>
       </Dialog>
-      {updated && (
-        <CustomizedSnackbars message={localStorage.getItem("toast")}/> 
-      )}
     </>
   );
 }

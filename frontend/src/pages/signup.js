@@ -60,7 +60,7 @@ export default function Signup() {
         validateStatus: () => true
     }).then(res => {
       if (res.status === 200) {
-        localStorage.setItem('toast','Account Created Successfully') 
+        localStorage.setItem('popup','Account Created Successfully') 
         setPopUp('Success');
       }
          else setPopUp('Failed');

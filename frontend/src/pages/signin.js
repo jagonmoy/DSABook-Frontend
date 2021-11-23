@@ -14,7 +14,6 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Navbar from "../components/navbar";
 import Home from "./home";
-import CustomizedSnackbars from "../components/customizedSnackbar";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,9 +56,10 @@ export default function Signin() {
     }).then(
       (res) => {
         if (res.status === 200) {
-          localStorage.setItem("username",res.data.data);
+          const msg = "Signed in Successfully!!"
+          localStorage.setItem("popup", msg);
+          localStorage.setItem("username", res.data.data);
           setPopUp("Success");
-          history.push('./') 
         }
         else setPopUp("Failed");
       },
@@ -71,7 +71,6 @@ export default function Signin() {
 
   if (localStorage.getItem('username') === null ) return (
     <>
-    {localStorage.getItem('toast') !== "null" && <CustomizedSnackbars message={localStorage.getItem('toast')}/> }
     <Navbar/>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -124,10 +123,11 @@ export default function Signin() {
           <Grid item style={{ marginTop : 20 }}>
           {popUp === "Failed" && (
             <Alert severity="error">
-              <AlertTitle>Error</AlertTitle>
-              <strong>Signed in Unsuccessfull!</strong>
+              <AlertTitle>Signed in Unsuccessfull!</AlertTitle>
+              <strong>Wrong email or Password</strong>
             </Alert>
-          )}
+              )}
+            {popUp === "Success" &&  history.push('./') }
           </Grid>
         </form>
         </div>

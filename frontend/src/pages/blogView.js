@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import theme from "../theme";
@@ -38,8 +33,6 @@ export default function BlogView() {
   const classes = useStyles(theme);
   let { blogID } = useParams();
 
-  const [openEdit, setOpenEdit] = useState(false);
-
   const [blog, setblog] = useState([]);
 
   useEffect(() => {
@@ -49,14 +42,14 @@ export default function BlogView() {
       validateStatus: () => true,
     }).then(
       (res) => {
-        const allBlog = res.data.data;
-        setblog(allBlog);
+        const Blog = res.data.data;
+        setblog(Blog);
       },
       (error) => {
         console.log(error);
       }
     );
-  }, [blog, openEdit]);
+  }, [blog]);
 
   return (
     <>
@@ -73,21 +66,11 @@ export default function BlogView() {
           className={classes.basic}
           alignItems="center"
           justify="center"
-        >  <Typography gutterBottom variant="h5" component="h3" color = "primary">
-            Blog Headline
-           </Typography>
+        >  
           <Typography gutterBottom variant="h5" component="h2">
             {blog.blogHeadline}
               </Typography>
                  <Typography
-            gutterBottom
-            variant="h6"
-            component="h3"
-            position="static"
-          >
-            {blog.blogDescription}
-          </Typography>
-          <Typography
             gutterBottom
             variant="h6"
             component="h3"
@@ -105,7 +88,6 @@ export default function BlogView() {
             {blog.username === localStorage.getItem("username") && (
               <EditModal blogID={blogID} blogUnit={blog} />
             )}
-           
           </div>
         </Grid>
       </Container>

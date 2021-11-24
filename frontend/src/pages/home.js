@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import theme from '../theme';
 import Navbar from '../components/navbar';
+import { Pagination } from '@material-ui/lab';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -26,26 +28,50 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Home() {
-
     const classes = useStyles(theme);
     const [blogs, setblogs] = useState([]);
-    // const [page, setPage] = useState(1);
+    const [page, setPage] = React.useState(1);
+    const [totalPage, setTotalPage] = React.useState(1);
+    const history = useHistory()
     document.title = "BlOG"
   
      
     useEffect(() => {
       axios({
           method: 'GET',
-          url: '/api/blogs/',
+          url: `/api/blogs?page=${page}&limit=3`,
           validateStatus: () => true
       }).then(res => {
-        const allBlogs = res.data.data;
-            
-        setblogs(allBlogs);
+        if (res.status === 200) {
+          const allBlogs = res.data.data;
+          setblogs(allBlogs);
+        }
+      
         }, (error) => {
           console.log(error)
-        }); 
-    }, [blogs]);
+      });
+    },[page]);
+
+    const handleChange = (event, value) => {
+      setPage(value);
+    };
+  
+    function totalPageNumber() {
+      axios({
+        method: "GET",
+        url: `/api/blogs`,
+        validateStatus: () => true,
+      }).then(
+        (res) => {
+   
+          setTotalPage(res.data.data.length);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+      return totalPage;
+    }
     
     return (
       <>
@@ -66,8 +92,17 @@ export default function Home() {
               <Blog blog={blog} key={blog.id} shorText={"summary"} />
             ))}
           </Grid>
+          <Grid
+          container
+          direction="column"
+          justify="center"
+            alignItems="center"
+           style = {{paddingTop : 25}}
+          >
+          <Pagination count={Math.ceil(totalPageNumber()/3)}  variant="outlined" color="primary" onChange={handleChange} />
+          </Grid>
         </Container>
-        {setTimeout(function(){ window.localStorage.removeItem("popup") }, 2000)}
+        {/* {()=>setTimeout(function(){ window.localStorage.removeItem("popup") }, 2000)} */}
       </>
         
     );

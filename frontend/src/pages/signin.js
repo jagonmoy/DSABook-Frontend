@@ -67,6 +67,7 @@ export default function Signin() {
         setPopUp("Failed");
       }
     );
+    setTimeout(function(){ window.localStorage.removeItem("popup") }, 2000)
   }
 
   if (localStorage.getItem('username') === null ) return (
@@ -123,7 +124,7 @@ export default function Signin() {
           <Grid item style={{ marginTop : 20 }}>
           {popUp === "Failed" && (
             <Alert severity="error">
-              <AlertTitle>Signed in Unsuccessfull!</AlertTitle>
+              <AlertTitle>Sign in Unsuccessfull!</AlertTitle>
               <strong>Wrong email or Password</strong>
             </Alert>
               )}
@@ -132,6 +133,7 @@ export default function Signin() {
         </form>
         </div>
       </Container>
+      {/* {setTimeout(function(){ window.localStorage.removeItem("popup") }, 2000)} */}
       </>
   );
   else return <Home/>

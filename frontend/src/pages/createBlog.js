@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../components/navbar';
+import { Alert, AlertTitle } from "@material-ui/lab";
+
 
 
 
@@ -21,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Signup() {
     const classes = useStyles();
     const history = useHistory()
-
+  const [popUp, setPopUp] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
 
 
@@ -40,8 +43,14 @@ export default function Signup() {
             data: {blogHeadline,blogDescription},
             validateStatus: () => true
         }).then(res => {
-            localStorage.setItem("popup","Blog Created Successfully!!!!")
-            history.push('./');
+          if (res.status === 201) {
+            localStorage.setItem("popup", "Blog Created Successfully!!!!");
+            history.push("./");
+          }
+          else {
+            setPopUp("Failed")
+            setErrorMessage(res.data.errors[0])
+          }
           }, (error) => {
              
           }); 
@@ -81,6 +90,12 @@ export default function Signup() {
               >
                 Add Blog
               </Button>
+              {popUp === "Failed" && (
+            <Alert severity="error" fullwidth = "true">
+              <AlertTitle>Blog Creation Unsuccessfull!!</AlertTitle>
+                  <strong>{errorMessage}</strong>
+            </Alert>
+          )}
             </form>
           </div>
         </Container>

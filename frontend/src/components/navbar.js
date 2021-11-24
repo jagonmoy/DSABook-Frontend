@@ -19,10 +19,14 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Navbar() {
-
+  console.log('navbar er vitor')
   const classes = useStyles(theme);
+  const [some, setSome] = useState(false);
   const history = useHistory()
-
+  
+  useEffect(() => {
+    
+  },[localStorage.getItem('username')])
 
   function signOutFunctionality() {
     axios({
@@ -33,7 +37,7 @@ function Navbar() {
       (res) => {
         window.localStorage.removeItem("username");
         window.localStorage.removeItem("popup")
-        history.push("./signin");
+        history.push("/signin");
       },
       (error) => {
         console.log(error);
@@ -54,13 +58,14 @@ function Navbar() {
            MyBlog
           </Typography>
           <Grid justifyContent="space-between" >
-            {localStorage.getItem('username') === null && <Button onClick={() => history.push('./signup')} variant="contained" color="primary" style={{ marginRight: 10 }} > SIGN UP </Button>}
-            {localStorage.getItem('username') === null && <Button onClick={() => history.push('./signin')} variant="contained" color="primary"> SIGN IN</Button>}
+            {localStorage.getItem('username') === null && <Button onClick={() => history.push('/signup')} variant="contained" color="primary" style={{ marginRight: 10 }} > SIGN UP </Button>}
+            {localStorage.getItem('username') === null && <Button onClick={() => history.push('/signin')} variant="contained" color="primary"> SIGN IN</Button>}
             {localStorage.getItem('username') !== null && <Typography color="primary" style={{ marginRight: 10 }} > {localStorage.getItem('username')}</Typography>}
-            {localStorage.getItem('username') !== null && <Button onClick={() => history.push('./createBlog')} variant="contained" color="primary" style={{ marginRight: 10 }} > CREATE BLOG</Button>}
+            {localStorage.getItem('username') !== null && <Button onClick={() => history.push('/newBlog')} variant="contained" color="primary" style={{ marginRight: 10 }} > CREATE BLOG</Button>}
             {localStorage.getItem('username') !== null && <Button onClick={() => signOutFunctionality()} variant="contained" color="primary"> SIGN OUT</Button>}
             {localStorage.getItem('popup') !== null && <CustomizedSnackbars message={localStorage.getItem('popup')} />}
-            {/* {setTimeout(function(){ window.localStorage.removeItem("popup") }, 10000)} */}
+            {console.log(localStorage.getItem('popup'))}
+            {console.log(localStorage.getItem('username'))}
           </Grid>
         </Grid>
       </Toolbar>

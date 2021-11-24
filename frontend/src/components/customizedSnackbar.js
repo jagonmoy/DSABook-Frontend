@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CustomizedSnackbars({ message }) {
-  console.log("hello");
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
@@ -37,6 +37,7 @@ export default function CustomizedSnackbars({ message }) {
           {message}
         </Alert>
       </Snackbar>
+      {setTimeout(function () { window.localStorage.removeItem("popup") }, 5000)}
     </div>
   );
 }

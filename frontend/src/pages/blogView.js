@@ -33,6 +33,8 @@ export default function BlogView() {
   const classes = useStyles(theme);
   let { blogID } = useParams();
 
+
+
   const [blog, setblog] = useState([]);
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export default function BlogView() {
         console.log(error);
       }
     );
-  }, [blog]);
+  },[localStorage.getItem('popup')]);
 
   return (
     <>

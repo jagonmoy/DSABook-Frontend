@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Blog(props) {
 
-console.log("kisher vitor")
 
   const classes = useStyles(theme);
   const history = useHistory()
@@ -61,7 +60,7 @@ console.log("kisher vitor")
             <Button
               size="small"
               color="primary"
-              onClick={() => { history.push(`/${blog.id}`) }}
+              onClick={() => { history.push(`/blogs/${blog.id}`) }}
             >
               Coninue Reading
             </Button>

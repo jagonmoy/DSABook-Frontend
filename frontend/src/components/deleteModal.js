@@ -8,8 +8,6 @@ import axios from "axios";
 
 export default function DeleteModal({blogID}) {
     const [open, setOpen] = React.useState(false);
-    const [yes, setYes] = React.useState(false);
-    const [no, setNo] = React.useState(false);
     const history = useHistory()
 
    
@@ -30,13 +28,13 @@ export default function DeleteModal({blogID}) {
             validateStatus: () => true
             
         },).then(res => {
-            console.log(res);
+          console.log(res);
+          localStorage.setItem('popup','Blog Created Successfully')
+          history.push('./');
           }, (error) => {
              
         }); 
-
-        setYes(true);
-        localStorage.setItem("popup","Blog Deleted SuccessFully!!");
+       
         setOpen(false);
     };
 
@@ -65,7 +63,6 @@ export default function DeleteModal({blogID}) {
          </Button>
         </DialogActions>
           </Dialog>
-          {yes && history.push('./') }
     </>
   );
 }

@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Signup() {
   const classes = useStyles();
   const history = useHistory()
-
+ 
 
 
   const [name,setName] = useState('');
@@ -48,7 +48,8 @@ export default function Signup() {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [confirmPassword,setConfirmPassword] = useState('');
-  const [popUp, setPopUp] = useState('');
+  const [popUp, setPopUp] = useState(''); 
+  const [errorMessage, setErrorMessage] = useState('');
   
   function submitHandelar(e) {
     e.preventDefault()
@@ -60,11 +61,13 @@ export default function Signup() {
         validateStatus: () => true
     }).then(res => {
       if (res.status === 200) {
-        localStorage.setItem('popup','Account Created Successfully') 
+        localStorage.setItem('popup', 'Account Created Successfully')
         setPopUp('Success');
       }
-         else setPopUp('Failed');
-         console.log(res.status);
+      else {
+        setPopUp('Failed');
+        setErrorMessage(res.data.errors[0])
+      }
       }, (error) => {
          setPopUp('Failed');
          console.log(error);
@@ -165,8 +168,8 @@ export default function Signup() {
            }
           {popUp === "Failed" && (
             <Alert severity="error">
-              <AlertTitle>Error</AlertTitle>
-              <strong>Account Creation Unsuccessfull!</strong>
+              <AlertTitle>Sign Up Unsuccessfull!!</AlertTitle>
+                  <strong>{errorMessage}</strong>
             </Alert>
           )}
           </Grid>

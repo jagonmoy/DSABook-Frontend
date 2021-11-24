@@ -7,13 +7,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
+import CustomizedSnackbars from './customizedSnackbar'
 
-export default function EditModal({blogID,blogUnit}) {
-    const [open, setOpen] = React.useState(false);
-    const [blog, setblog] = useState(blogUnit);
+export default function EditModal({ blogID, blogUnit }) {
+  const [open, setOpen] = React.useState(false);
+  const [blog, setblog] = useState(blogUnit);
     const [blogHeadline, setBlogHeadline] = useState(blog.blogHeadline);
     const [blogDescription, setBlogDescription] = useState(blog.blogDescription);
-    const [updated, setUpdated] = useState(false);
+    // const [updated, setUpdated] = useState(false);
     const history = useHistory()
 
   const handleClickOpen = () => {
@@ -23,10 +24,7 @@ export default function EditModal({blogID,blogUnit}) {
   const handleClose = () => {
     setOpen(false);
   };
-  
-  useEffect(() => {
-      
-  },[blog])    
+    
 
  const handleUpdateClose = (e) => {
         e.preventDefault()
@@ -37,9 +35,11 @@ export default function EditModal({blogID,blogUnit}) {
         validateStatus: () => true
         
     },).then(res => {
-        setUpdated(true);
+        // setUpdated(true);
         localStorage.setItem('popup', "Blog Updated Successfully!!")
-        history.push(`./${blogID}`)
+        history.push(`/blogs/${blogID}`)
+    
+        
       }, (error) => {
       
     });       
@@ -86,7 +86,8 @@ export default function EditModal({blogID,blogUnit}) {
             </Button>
           </DialogActions>
         </DialogContent>
-      </Dialog>
+        {localStorage.getItem('popup') !== null && <CustomizedSnackbars message={localStorage.getItem('popup')} /> }
+      </Dialog> 
     </>
   );
 }

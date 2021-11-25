@@ -72,69 +72,69 @@ export default function Signin() {
 
   if (localStorage.getItem('username') === null ) return (
     <>
-    <Navbar/>
-    <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate onSubmit={submitHandelar}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-           <Grid item>
-          <Link onClick={()=>history.push('./signup')}variant="body2">
+      <Navbar />
+      <Container component="main" maxWidth="xs">
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form className={classes.form} noValidate onSubmit={submitHandelar}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign In
+            </Button>
+            <Grid item>
+              <Link onClick={() => history.push("./signup")} variant="body2">
                 {"Don't have an account? Sign Up"}
-            </Link>
-          </Grid>
-          <Grid item style={{ marginTop : 20 }}>
-          {popUp === "Failed" && (
-            <Alert severity="error">
-              <AlertTitle>Sign in Unsuccessfull!</AlertTitle>
-              <strong>Wrong email or Password</strong>
-            </Alert>
+              </Link>
+            </Grid>
+            <Grid item style={{ marginTop: 20 }}>
+              {popUp === "Failed" && (
+                <Alert severity="error">
+                  <AlertTitle>Sign in Unsuccessfull!</AlertTitle>
+                  <strong>Wrong email or Password</strong>
+                </Alert>
               )}
-            {popUp === "Success" &&  history.push('./') }
-          </Grid>
-        </form>
+              {popUp === "Success" && history.push("./")}
+            </Grid>
+          </form>
         </div>
       </Container>
       {/* {setTimeout(function(){ window.localStorage.removeItem("popup") }, 2000)} */}
-      </>
+    </>
   );
   else return <Home/>
 }

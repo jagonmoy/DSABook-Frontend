@@ -23,10 +23,10 @@ function Navbar() {
   const classes = useStyles(theme);
   const [some, setSome] = useState(false);
   const history = useHistory()
-  
-  useEffect(() => {
-    
-  },[localStorage.getItem('username')])
+
+  // useEffect(() => {
+
+  // },[localStorage.getItem('username')])
 
   function signOutFunctionality() {
     axios({
@@ -44,10 +44,10 @@ function Navbar() {
       }
     );
   }
- 
+
 
   return (
-    <AppBar className={classes.appbar} position="static">
+    <AppBar className={classes.appbar} position = {'static'}>
       <Toolbar>
         <Grid
           justifyContent="space-between"
@@ -58,11 +58,12 @@ function Navbar() {
            MyBlog
           </Typography>
           <Grid justifyContent="space-between" >
+            {/* {localStorage.getItem('username') !== null && <Typography color="primary" > {localStorage.getItem('username')}</Typography>} */}
             {localStorage.getItem('username') === null && <Button onClick={() => history.push('/signup')} variant="contained" color="primary" style={{ marginRight: 10 }} > SIGN UP </Button>}
             {localStorage.getItem('username') === null && <Button onClick={() => history.push('/signin')} variant="contained" color="primary"> SIGN IN</Button>}
-            {localStorage.getItem('username') !== null && <Typography color="primary" style={{ marginRight: 10 }} > {localStorage.getItem('username')}</Typography>}
             {localStorage.getItem('username') !== null && <Button onClick={() => history.push('/newBlog')} variant="contained" color="primary" style={{ marginRight: 10 }} > CREATE BLOG</Button>}
-            {localStorage.getItem('username') !== null && <Button onClick={() => signOutFunctionality()} variant="contained" color="primary"> SIGN OUT</Button>}
+            {localStorage.getItem('username') !== null && <Button onClick={() => signOutFunctionality()} variant="contained" color="primary"  style={{ marginRight: 10 }} > SIGN OUT</Button>}
+            {localStorage.getItem('username') !== null && <Button color="primary" > {localStorage.getItem('username')}</Button>}
             {localStorage.getItem('popup') !== null && <CustomizedSnackbars message={localStorage.getItem('popup')} />}
             {console.log(localStorage.getItem('popup'))}
             {console.log(localStorage.getItem('username'))}

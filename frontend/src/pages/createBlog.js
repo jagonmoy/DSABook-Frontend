@@ -7,6 +7,8 @@ import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { TextareaAutosize } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 
@@ -59,34 +61,35 @@ export default function Signup() {
     
     if (localStorage.getItem('username') !== null)  return (
       <>
+        <CssBaseline />
         <Navbar />
-        <Container component="main" maxWwdth="xs">
-          <div className={classes.paper} maxwidth={120}>
+        <Container component="main" maxWwdth="xs" style = {{paddingTop: 25}}>
             <form className={classes.form} noValidate onSubmit={submitHandelar}>
               <TextField
                 id="outlined-multiline-flexible"
                 label="Blog Headline"
                 fullWidth
                 multiline
-                maxRows={2}
+                maxRows={3}
                 value={blogHeadline}
                 onChange={(e) => setBlogHeadline(e.target.value)}
+                style = {{paddingBottom : 20}}
               />
               <TextField
                 id="outlined-textarea"
                 label="Blog Description"
                 fullWidth
-                maxRows={10}
                 multiline
                 value={blogDescription}
                 onChange={(e) => setBlogDescription(e.target.value)}
+                style = {{paddingBottom : 20}}
               />
               <Button
                 type="submit"
-                fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+              
               >
                 Add Blog
               </Button>
@@ -97,7 +100,7 @@ export default function Signup() {
             </Alert>
           )}
             </form>
-          </div>
+
         </Container>
       </>
     );

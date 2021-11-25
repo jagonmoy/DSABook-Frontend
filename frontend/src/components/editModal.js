@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import TextareaAutosize from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -59,20 +59,21 @@ export default function EditModal({ blogID, blogUnit }) {
       >
         <DialogTitle id="form-dialog-title">EDIT BLOG</DialogTitle>
         <DialogContent>
-            <TextField
+            <TextareaAutosize
               id="outlined-multiline-flexible"
               label="Blog Headline"
               fullWidth
               multiline
               maxRows={2}
               value={blogHeadline}
-              onChange={(e) => setBlogHeadline(e.target.value)}
-            />
-            <TextField
+            onChange={(e) => setBlogHeadline(e.target.value)}
+            style = {{paddingBottom: 20}}
+          />
+            <TextareaAutosize
               id="outlined-textarea"
               label="Blog Description"
               fullWidth
-              maxRows={10}
+              minRows={5}
               multiline
               value={blogDescription}
               onChange={(e) => setBlogDescription(e.target.value)}

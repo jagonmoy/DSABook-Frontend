@@ -19,6 +19,7 @@ function App() {
           <Route exact path="/signin" component={Signin}/>
           <Route exact path="/newBlog" component={CreateBlog}/>
           <Route exact path="/blogs/:blogID" component={BlogView} />
+          <Route component={PageNotFound} />
         </Switch>
       </Router>
     </div>

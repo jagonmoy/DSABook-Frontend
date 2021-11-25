@@ -73,7 +73,7 @@ export default function Home() {
         <Navbar />
         <Container maxWidth="lg" >
         <br/>
-        <Typography variant="h3" gutterBottom component="div" align="center" color = "primary">
+        <Typography variant="h4" gutterBottom component="div" align="center" color = "primary">
           BLOGS
         </Typography>
         

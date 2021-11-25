@@ -9,6 +9,7 @@ import Navbar from '../components/navbar';
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { TextareaAutosize } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import PageNotFound from './pageNotFound';
 
 
 
@@ -105,6 +106,6 @@ export default function Signup() {
       </>
     );
     else return (
-        <h1> Page Not Authorized </h1>
+        <PageNotFound/>
     )
 }

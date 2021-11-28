@@ -47,7 +47,6 @@ export default function Signin() {
 
   function submitHandelar(e) {
     e.preventDefault();
-    console.log(email, password);
     axios({
       method: "POST",
       url: "/api/auth/signin/",

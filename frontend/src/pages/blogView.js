@@ -9,32 +9,29 @@ import Navbar from "../components/navbar";
 import { Container } from "@material-ui/core";
 import EditModal from "../components/editModal";
 import DeleteModal from "../components/deleteModal";
-import Moment from 'react-moment';
-import 'moment-timezone';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import moment from "moment";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    //paddingBottom: theme.spacing(3),
+
   },
   basic: {
     marginTop: theme.spacing(3),
-    width: theme.spacing(100),
     display: "block",
     width: "100%",
     transitionDuration: "0.3s",
   },
-  // title: {
-  //    fontWeight: 800,
-  //    paddingBottom : theme.spacing(3),
-  //    paddingTop : theme.spacing(3),
-  //  }
+
 }));
 
 export default function BlogView() {
   const classes = useStyles(theme);
   let { blogID } = useParams();
-
+  const [story, setStory] = useState("");
   const [blog, setblog] = useState([]);
+  const checkPopUp = localStorage.getItem('popup');
 
   useEffect(() => {
     axios({
@@ -43,17 +40,28 @@ export default function BlogView() {
       validateStatus: () => true,
     }).then(
       (res) => {
-        const Blog = res.data.data;
-        setblog(Blog);
+        if (res.status === 200) {
+          const Blog = res.data.data;
+          setTimeout(function () {
+            setblog(Blog);
+            setStory(Blog.blogDescription);
+          }, 3000);
+          setTimeout(function () {
+            window.localStorage.removeItem("popup")
+          }, 2000);
+         
+        }
       },
       (error) => {
         console.log(error);
       }
     );
-  }, [localStorage.getItem("popup"), blog]);
+  
+  }, [checkPopUp]);
 
   return (
-    <React.Fragment>
+    <>
+      <CssBaseline/>
       <Navbar />
       <Container
         styles={{
@@ -71,8 +79,10 @@ export default function BlogView() {
           >
             {blog.blogHeadline}
           </Typography>
-          <Typography Typography variant="body2" gutterBottom>
-            {blog.blogDescription}
+          <Typography Typography variant="body1" gutterBottom>
+            {story.toString().split("\n").map((i, key) => {
+              return <p key={key}>{i}</p>;
+            })}
           </Typography>
           <br />
           <br />
@@ -96,14 +106,15 @@ export default function BlogView() {
               gutterBottom
               style={{ paddingRight: 5 }}
             >
-              created At:
+              Creation Time: 
             </Typography>
+
             <Typography variant="caption" display="block" gutterBottom>
-              <Moment parse="YYYY-MM-DD HH:mm" interval={30000}>
-                {blog.createdAt}
-              </Moment>
+              {moment(blog.createdAt).format('LLL')}
             </Typography>
+
           </Grid>
+
           <Grid container item xs={12}>
             <Typography
               variant="caption"
@@ -111,15 +122,19 @@ export default function BlogView() {
               gutterBottom
               style={{ paddingRight: 5 }}
             >
-              updated At:
+              Last Update:
             </Typography>
-            <Typography variant="caption" display="block" gutterBottom   style={{ paddingBottom: 15 }}>
-              <Moment parse="YYYY-MM-DD HH:mm" interval={30000}>
-                {blog.updatedAt}
-              </Moment>
+
+            <Typography
+              variant="caption"
+              display="block"
+              gutterBottom
+              style={{ paddingBottom: 15 }}
+            >
+              {moment(blog.updatedAt).format('LLL')}
             </Typography>
           </Grid>
-          <div>
+          <div style = {{paddingBottom : 20}}>
             {blog.username === localStorage.getItem("username") && (
               <DeleteModal blogID={blogID} />
             )}
@@ -128,9 +143,9 @@ export default function BlogView() {
             )}
           </div>
         </Grid>
+      
       </Container>
-    </React.Fragment>
+    </>
   );
 
-  // return <h1>{blog.username}</h1>
 }

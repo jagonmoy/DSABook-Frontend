@@ -53,7 +53,6 @@ export default function Signup() {
   
   function submitHandelar(e) {
     e.preventDefault()
-    console.log(name,userName,email);
     axios({
         method: 'POST',
         url: '/api/auth/signup/',

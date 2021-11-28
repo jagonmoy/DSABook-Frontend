@@ -5,6 +5,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 export default function DeleteModal({blogID}) {
     const [open, setOpen] = React.useState(false);
@@ -17,8 +19,6 @@ export default function DeleteModal({blogID}) {
     };
 
     const handleClose = () => {
-      console.log("hello From HandleClose");
-
       setOpen(false);
     };
     const handleYesClose = () => {
@@ -27,25 +27,19 @@ export default function DeleteModal({blogID}) {
             url: `/api/blogs/${blogID}`,
             validateStatus: () => true
             
-        },).then(res => {
-          console.log(res);
-          localStorage.setItem('popup','Blog Created Successfully')
-          history.push('./');
+        }).then(res => {
+          localStorage.setItem('popup','Blog Deleted Successfully')
+          history.push('/blogs');
           }, (error) => {
-             
         }); 
-       
-        setOpen(false);
+      setOpen(false);
+      setTimeout(function(){ window.localStorage.removeItem("popup") }, 2000)
     };
-
- 
- 
-
 
   return (
     <>
       <Button variant="contained" color="primary" onClick={handleClickOpen} >
-        DELETE
+       <DeleteIcon/>
       </Button>
       <Dialog
         open={open}

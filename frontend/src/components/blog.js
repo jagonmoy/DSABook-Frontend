@@ -70,7 +70,7 @@ export default function Blog(props) {
             size="small"
             color="primary"
             onClick={() => {
-              history.push(`/blogs/${blog.id}`);
+              history.push(`/blogs/${blog._id}`);
             }}
           >
             Coninue Reading

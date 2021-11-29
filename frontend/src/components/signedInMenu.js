@@ -43,6 +43,10 @@ export default function SignedInMenu() {
         history.push('/new-blog')
         setAnchorEl(null);
     };
+    const handleMyBlogs = () => {
+      history.push('/my-blog')
+      setAnchorEl(null);
+   };
     
 
 
@@ -82,6 +86,16 @@ export default function SignedInMenu() {
               color = "primary"
           >
             CREATE BLOG
+            </Typography>
+          </MenuItem>
+          <MenuItem onClick={handleMyBlogs} color="primary">
+          <Typography
+              variant="overline"
+              display="block"
+              gutterBottom
+              color = "primary"
+          >
+             MY BLOGS
             </Typography>
           </MenuItem>
         </Menu>

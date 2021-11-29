@@ -8,6 +8,7 @@ import theme from '../theme';
 import Navbar from '../components/navbar';
 import { Pagination } from '@material-ui/lab';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import PageNotFound from './pageNotFound';
 
 
 
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Home() {
+export default function MyBlog() {
     const classes = useStyles(theme);
     const [blogs, setblogs] = useState([]);
     const [page, setPage] = React.useState(1);
@@ -30,7 +31,7 @@ export default function Home() {
     useEffect(() => {
       axios({
           method: 'GET',
-          url: `/api/blogs?page=${page}&limit=6`,
+          url: `/api/users/${localStorage.getItem('username')}/myblog?page=${page}&limit=6`,
           validateStatus: () => true
       }).then(res => {
         if (res.status === 200) {
@@ -50,7 +51,7 @@ export default function Home() {
     function totalPageNumber() {
       axios({
         method: "GET",
-        url: `/api/blogs`,
+        url:`/api/users/${localStorage.getItem('username')}/myblog`,
         validateStatus: () => true,
       }).then(
         (res) => {
@@ -63,7 +64,7 @@ export default function Home() {
       return totalPage;
     }
     
-    return (
+    if (localStorage.getItem('username') !== null) return (
       <>
         <CssBaseline/>
         <Navbar />
@@ -89,6 +90,8 @@ export default function Home() {
           
         </Container>
       </>
-        
     );
+    else return (
+        <PageNotFound/>
+    )
 }

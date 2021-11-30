@@ -9,7 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Alert} from '@material-ui/lab';
 import { useHistory } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import Navbar from '../components/navbar';
@@ -49,7 +49,11 @@ export default function Signup() {
   const [password,setPassword] = useState('');
   const [confirmPassword,setConfirmPassword] = useState('');
   const [popUp, setPopUp] = useState(''); 
-  const [errorMessage, setErrorMessage] = useState('');
+  const [nameError, setNameError] = useState(null);
+  const [userNameError, setUserNameError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(null); 
   
   function submitHandelar(e) {
     e.preventDefault()
@@ -65,7 +69,19 @@ export default function Signup() {
       }
       else {
         setPopUp('Failed');
-        setErrorMessage(res.data.errors[0])
+        setNameError(null); 
+        setUserNameError(null);
+        setEmailError(null);
+        setPasswordError(null);
+        setConfirmPasswordError(null);
+        for (let i = 0; i < res.data.errors.length; i++) {
+          console.log(res.data.errors[i].split(' ')[0])
+          if (res.data.errors[i].split(' ')[0] === 'Name') setNameError(res.data.errors[i]); 
+          if (res.data.errors[i].split(' ')[0] === 'Username') setUserNameError(res.data.errors[i]);
+          if (res.data.errors[i].split(' ')[0] === 'Email') setEmailError(res.data.errors[i]);
+          if (res.data.errors[i].split(' ')[0] === 'Password') setPasswordError(res.data.errors[i]);
+          if (res.data.errors[i].split(' ')[0] === 'Confirmation') setConfirmPasswordError(res.data.errors[i]);
+        }
       }
       }, (error) => {
          setPopUp('Failed');
@@ -87,7 +103,7 @@ export default function Signup() {
         </Typography>
         <form className={classes.form} noValidate onSubmit={submitHandelar}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} >
               <TextField
                 name="name"
                 variant="outlined"
@@ -98,8 +114,13 @@ export default function Signup() {
                 autoFocus
                 onChange={(e) => setName(e.target.value)}
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
+              </Grid>
+              {nameError !== null && (
+            <Alert severity="error">
+                  <strong>{nameError}</strong>
+            </Alert>
+          )}
+            <Grid item xs={12} >
               <TextField
                 variant="outlined"
                 required
@@ -109,7 +130,12 @@ export default function Signup() {
                 name="userName"
                 onChange={(e) => setUserName(e.target.value)}
               />
-            </Grid>
+              </Grid>
+              {userNameError !== null && (
+            <Alert severity="error">
+                  <strong>{userNameError}</strong>
+            </Alert>
+          )}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -120,7 +146,12 @@ export default function Signup() {
                 name="email"
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </Grid>
+              </Grid>
+              {emailError !== null && (
+            <Alert severity="error">
+                  <strong>{emailError}</strong>
+            </Alert>
+          )}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -132,7 +163,12 @@ export default function Signup() {
                 id="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </Grid>
+              </Grid>
+              {passwordError !== null && (
+            <Alert severity="error">
+                  <strong>{passwordError}</strong>
+            </Alert>
+          )}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -144,7 +180,12 @@ export default function Signup() {
                 id="confirmpassword"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-            </Grid>
+              </Grid>
+              {confirmPasswordError !== null && (
+            <Alert severity="error">
+                  <strong>{confirmPasswordError}</strong>
+            </Alert>
+          )}
           </Grid>
           <Button
             type="submit"
@@ -165,12 +206,6 @@ export default function Signup() {
           <Grid item style={{ marginTop : 20 }}>
           {popUp === "Success" && history.push('./signin')
            }
-          {popUp === "Failed" && (
-            <Alert severity="error">
-              <AlertTitle>Sign Up Unsuccessfull!!</AlertTitle>
-                  <strong>{errorMessage}</strong>
-            </Alert>
-          )}
           </Grid>
         </form>
       </div>

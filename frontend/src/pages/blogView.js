@@ -45,10 +45,10 @@ export default function BlogView() {
           setTimeout(function () {
             setblog(Blog);
             setStory(Blog.blogDescription);
-          }, 3000);
+          }, 1000);
           setTimeout(function () {
             window.localStorage.removeItem("popup")
-          }, 2000);
+          }, 500);
          
         }
       },

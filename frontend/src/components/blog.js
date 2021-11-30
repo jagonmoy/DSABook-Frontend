@@ -73,7 +73,7 @@ export default function Blog(props) {
               history.push(`/blogs/${blog._id}`);
             }}
           >
-            Coninue Reading
+            Continue Reading
           </Button>
         </CardActions>
       </Card>

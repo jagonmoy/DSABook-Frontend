@@ -135,7 +135,7 @@ export default function BlogView() {
             </Typography>
           </Grid>
           <div style = {{paddingBottom : 20}}>
-            {blog.username === localStorage.getItem("username") && (
+            { (blog.username === localStorage.getItem("username") || "admin" === localStorage.getItem("username")) && (
               <DeleteModal blogID={blogID} />
             )}
             {blog.username === localStorage.getItem("username") && (

@@ -49,7 +49,7 @@ export default function Signin() {
     e.preventDefault();
     axios({
       method: "POST",
-      url: "/api/auth/signin/",
+      url: "https://dsa-book.herokuapp.com/api/auth/signin/",
       data: { email, password },
       validateStatus: () => true,
     }).then(

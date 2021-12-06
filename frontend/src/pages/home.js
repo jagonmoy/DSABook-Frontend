@@ -30,7 +30,7 @@ export default function Home() {
     useEffect(() => {
       axios({
           method: 'GET',
-          url: `/api/blogs?page=${page}&limit=6`,
+          url: `https://dsa-book.herokuapp.com/api/blogs?page=${page}&limit=6`,
           validateStatus: () => true
       }).then(res => {
         if (res.status === 200) {
@@ -50,7 +50,7 @@ export default function Home() {
     function totalPageNumber() {
       axios({
         method: "GET",
-        url: `/api/blogs`,
+        url: `https://dsa-book.herokuapp.com/api/blogs`,
         validateStatus: () => true,
       }).then(
         (res) => {

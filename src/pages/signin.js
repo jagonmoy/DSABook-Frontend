@@ -51,6 +51,7 @@ export default function Signin() {
       method: "POST",
       url: "https://dsa-book-backend.herokuapp.com/api/auth/signin/",
       data: { email, password },
+      withCredentials: true ,
       validateStatus: () => true,
     }).then(
       (res) => {

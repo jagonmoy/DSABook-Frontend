@@ -30,7 +30,8 @@ export default function Home() {
     useEffect(() => {
       axios({
           method: 'GET',
-          url: `https://dsa-book-backend.herokuapp.com/api/blogs?page=${page}&limit=6`,
+        url: `https://dsa-book-backend.herokuapp.com/api/blogs?page=${page}&limit=6`,
+        withCredentials: true ,
           validateStatus: () => true
       }).then(res => {
         if (res.status === 200) {
@@ -51,6 +52,7 @@ export default function Home() {
       axios({
         method: "GET",
         url: `https://dsa-book-backend.herokuapp.com/api/blogs`,
+        withCredentials: true ,
         validateStatus: () => true,
       }).then(
         (res) => {

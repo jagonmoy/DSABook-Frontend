@@ -30,7 +30,8 @@ export default function EditModal({ blogID, blogUnit }) {
     axios({
         method: 'PATCH',
         url: `https://dsa-book-backend.herokuapp.com/api/blogs/${blogID}`,
-        data: {blogHeadline,blogDescription},
+      data: { blogHeadline, blogDescription },
+      withCredentials: true ,
         validateStatus: () => true
         
     }).then(res => {

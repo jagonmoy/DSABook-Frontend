@@ -39,6 +39,7 @@ export default function BlogView() {
     axios({
       method: "GET",
       url: `https://dsa-book-backend.herokuapp.com/api/blogs/${blogID}`,
+      withCredentials: true ,
       validateStatus: () => true,
     }).then(
       (res) => {

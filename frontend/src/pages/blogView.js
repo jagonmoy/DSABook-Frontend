@@ -11,6 +11,7 @@ import EditModal from "../components/editModal";
 import DeleteModal from "../components/deleteModal";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import moment from "moment";
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +33,7 @@ export default function BlogView() {
   const [story, setStory] = useState("");
   const [blog, setblog] = useState([]);
   const checkPopUp = localStorage.getItem('popup');
+  const history = useHistory()
 
   useEffect(() => {
     axios({
@@ -49,10 +51,13 @@ export default function BlogView() {
           setTimeout(function () {
             window.localStorage.removeItem("popup")
           }, 500);
-         
+        }
+        else {
+          history.push('/pageNotFound')
         }
       },
       (error) => {
+        history.push('/pageNotFound')
         console.log(error);
       }
     );

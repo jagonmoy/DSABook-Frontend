@@ -57,7 +57,6 @@ export default function Signin() {
       (res) => {
         if (res.status === 200) {
           const msg = "Signed in Successfully!!"
-          console.log(res);
           localStorage.setItem("popup", msg);
           localStorage.setItem("username", res.data.data);
           setPopUp("Success");

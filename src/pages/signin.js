@@ -51,13 +51,12 @@ export default function Signin() {
       method: "POST",
       url: "https://dsa-book-backend.herokuapp.com/api/auth/signin/",
       data: { email, password },
-      withCredentials: true ,
+      withCredentials:true ,
       validateStatus: () => true,
     }).then(
       (res) => {
         if (res.status === 200) {
-          const msg = "Signed in Successfherully!!"
-          console.log(res);
+          const msg = "Signed in Successfully!!"
           localStorage.setItem("popup", msg);
           localStorage.setItem("username", res.data.data);
           setPopUp("Success");

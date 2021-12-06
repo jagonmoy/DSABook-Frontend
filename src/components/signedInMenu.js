@@ -15,7 +15,7 @@ export default function SignedInMenu() {
     function signOutFunctionality() {
         axios({
           method: "POST",
-          url: "/api/auth/signout/",
+          url: "https://dsa-book-backend.herokuapp.com/api/auth/signout/",
           validateStatus: () => true,
         }).then(
           (res) => {

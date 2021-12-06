@@ -59,7 +59,7 @@ export default function Signup() {
     e.preventDefault()
     axios({
         method: 'POST',
-        url: '/api/auth/signup/',
+        url: 'https://dsa-book-backend.herokuapp.com/api/auth/signup/',
         data: { name,username : userName,email,password,confirmPassword },
         validateStatus: () => true
     }).then(res => {

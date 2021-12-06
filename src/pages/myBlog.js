@@ -31,7 +31,7 @@ export default function MyBlog() {
     useEffect(() => {
       axios({
           method: 'GET',
-          url: `/api/users/${localStorage.getItem('username')}/myblog?page=${page}&limit=6`,
+          url: `https://dsa-book-backend.herokuapp.com/api/users/${localStorage.getItem('username')}/myblog?page=${page}&limit=6`,
           validateStatus: () => true
       }).then(res => {
         if (res.status === 200) {

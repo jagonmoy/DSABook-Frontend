@@ -42,7 +42,7 @@ export default function Signup() {
         e.preventDefault()
         axios({
             method: 'POST',
-            url: '/api/blogs/',
+            url: 'https://dsa-book-backend.herokuapp.com/api/blogs/',
             data: {blogHeadline,blogDescription},
             validateStatus: () => true
         }).then(res => {

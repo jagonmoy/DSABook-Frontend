@@ -24,7 +24,7 @@ export default function DeleteModal({blogID}) {
     const handleYesClose = () => {
         axios({
             method: 'DELETE',
-            url: `https://dsa-book.herokuapp.com/api/blogs/${blogID}`,
+            url: `/api/blogs/${blogID}`,
             validateStatus: () => true
             
         }).then(res => {

@@ -49,5 +49,6 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0"
-  }
+  },
+  "proxy" : "https://dsa-book-backend.herokuapp.com"
 }

@@ -38,7 +38,7 @@ export default function BlogView() {
   useEffect(() => {
     axios({
       method: "GET",
-      url: `https://dsa-book.herokuapp.com/api/blogs/${blogID}`,
+      url: `/api/blogs/${blogID}`,
       validateStatus: () => true,
     }).then(
       (res) => {

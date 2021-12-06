@@ -31,7 +31,7 @@ export default function MyBlog() {
     useEffect(() => {
       axios({
           method: 'GET',
-          url: `https://dsa-book.herokuapp.com/api/users/${localStorage.getItem('username')}/myblog?page=${page}&limit=6`,
+          url: `/api/users/${localStorage.getItem('username')}/myblog?page=${page}&limit=6`,
           validateStatus: () => true
       }).then(res => {
         if (res.status === 200) {
@@ -51,7 +51,7 @@ export default function MyBlog() {
     function totalPageNumber() {
       axios({
         method: "GET",
-        url:`https://dsa-book.herokuapp.com/api/users/${localStorage.getItem('username')}/myblog`,
+        url:`/api/users/${localStorage.getItem('username')}/myblog`,
         validateStatus: () => true,
       }).then(
         (res) => {

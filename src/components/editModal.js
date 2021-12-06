@@ -29,7 +29,7 @@ export default function EditModal({ blogID, blogUnit }) {
         e.preventDefault()
     axios({
         method: 'PATCH',
-        url: `https://dsa-book-backend.herokuapp.com/api/blogs/${blogID}`,
+        url: `/api/blogs/${blogID}`,
         data: { blogHeadline, blogDescription },
           withCredentials: true ,
         validateStatus: () => true

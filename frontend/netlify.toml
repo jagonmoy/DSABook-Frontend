@@ -1,3 +1,3 @@
 [build]
-  command=''"CI= npm run build”
-  "\n"
+  command=' '"CI= npm run build”
+ 

@@ -53,6 +53,7 @@ export default function EditModal({ blogID, blogUnit }) {
       </Button>
       <Dialog
         open={open}
+         fullScreen
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >

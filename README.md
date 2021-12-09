@@ -102,14 +102,6 @@ In my Internship Program in **Cefalo Bangladesh Limited** I was asked to create 
 
 <br>
 
-<li> <h3> <a href = "#api" > 3.&nbsp; Functionalities </a> </h3> </li> 
-
-<br>
-
-<h4>&nbsp; &nbsp; &nbsp;<a href = "#authapi" > 3.1 &nbsp; Auth Related Endpoints </a> </h4>
-
-<br>
-
 # <h1 id = 'introduction'> 1. Introduction</h1>
 <br>
 

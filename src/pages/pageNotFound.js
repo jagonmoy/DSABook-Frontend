@@ -1,45 +1,45 @@
-import Typography from "@material-ui/core/Typography";
+import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
-
+import React from 'react';
 
 
 export default function PageNotFound() {
-    const history = useHistory()
+	const history = useHistory();
 
-    return (
-      <>
-        <Typography
-          variant="h4"
-          gutterBottom
-          component="div"
-          color="primary"
-          fontWeight="bold"
-          style={{ paddingTop: "20%" }}
-          align="center"
-        >
+	return (
+		<>
+			<Typography
+				variant="h4"
+				gutterBottom
+				component="div"
+				color="primary"
+				fontWeight="bold"
+				style={{ paddingTop: '20%' }}
+				align="center"
+			>
           404 - Page Not Found!!!!
-        </Typography>
+			</Typography>
       
-        <Typography
-          variant="h6"
-          display="block"
-          gutterBottom
-          color="primary"
-          align="center"
-        >
+			<Typography
+				variant="h6"
+				display="block"
+				gutterBottom
+				color="primary"
+				align="center"
+			>
           Go Back to
-        </Typography>
-        <Typography
-          variant="button"
-          display="block"
-          gutterBottom
-          color="primary"
-          align="center"
-          onClick={() => history.push("/")}
-        >
+			</Typography>
+			<Typography
+				variant="button"
+				display="block"
+				gutterBottom
+				color="primary"
+				align="center"
+				onClick={() => history.push('/')}
+			>
           HomePage
-          </Typography>
+			</Typography>
        
-      </>
-    );
+		</>
+	);
 }

@@ -21,13 +21,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-Blog.PropTypes = {
-	blog: PropTypes.object.isRequired,
+Blog.protoTypes = {
+	blog : PropTypes.string.isRequired,
 };
 
 export default function Blog(blog) {
 	const classes = useStyles(theme);
 	const history = useHistory();
+	console.log('Hello',blog.blog);
 	return (
 		<Grid item xs={12} sm={6} md={4}>
 			<Card className={classes.root}>
@@ -39,31 +40,31 @@ export default function Blog(blog) {
 							component="h2"
 							color="primary"
 						>
-							{blog.blogHeadline.split(' ').join('').length > 30
-								? blog.blogHeadline.substring(0, 51).concat('...')
-								: blog.blogHeadline
-									.substring(0, blog.blogHeadline.length)
+							{blog.blog.blogHeadline.split(' ').join('').length > 30
+								? blog.blog.blogHeadline.substring(0, 51).concat('...')
+								: blog.blog.blogHeadline
+									.substring(0, blog.blog.blogHeadline.length)
 									.concat(
-										Array(51 - blog.blogHeadline.split(' ').join('').length)
+										Array(51 - blog.blog.blogHeadline.split(' ').join('').length)
 											.fill('\xa0')
 											.join(' ')
 									)
 							}
 						</Typography>
 						<Typography variant="body2" color="textSecondary" component="p">
-							{blog.blogDescription.substring(0, 40).concat('...')}
+							{blog.blog.blogDescription.substring(0, 40).concat('...')}
 						</Typography>
 						<br />
 						<br />
 						<Typography variant="subtitle2" component="p">
-							{blog.username}
+							{blog.blog.username}
 						</Typography>
 						<Typography variant="subtitle2" color="textSecondary" component="p">
-              Creation Time: {moment(blog.createdAt).format('LLL')}
+              Creation Time: {moment(blog.blog.createdAt).format('LLL')}
 						</Typography>
 
 						<Typography variant="subtitle2" color="textSecondary" component="p">
-              Last Update: {moment(blog.updatedAt).format('LLL')}
+              Last Update: {moment(blog.blog.updatedAt).format('LLL')}
 						</Typography>
 					</CardContent>
 				</CardActionArea>
@@ -72,7 +73,7 @@ export default function Blog(blog) {
 						size="small"
 						color="primary"
 						onClick={() => {
-							history.push(`/blogs/${blog._id}`);
+							history.push(`/blogs/${blog.blog._id}`);
 						}}
 					>
             Continue Reading

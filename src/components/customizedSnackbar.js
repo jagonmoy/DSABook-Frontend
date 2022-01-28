@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-CustomizedSnackbars.PropTypes = {
+CustomizedSnackbars.protoTypes = {
 	message: PropTypes.string.isRequired,
 };
 

@@ -11,7 +11,7 @@ import CustomizedSnackbars from './customizedSnackbar';
 import EditIcon from '@material-ui/icons/Edit';
 import PropTypes from 'prop-types';
 
-EditModal.PropTypes = {
+EditModal.protoTypes = {
 	blogID: PropTypes.string.isRequired,
 	blogUnit: PropTypes.string.isRequired,
 };

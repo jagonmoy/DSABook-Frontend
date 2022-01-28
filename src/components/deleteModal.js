@@ -8,7 +8,7 @@ import axios from 'axios';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PropTypes from 'prop-types';
 
-DeleteModal.PropTypes = {
+DeleteModal.protoTypes = {
 	blogID: PropTypes.string.isRequired,
 };
 
